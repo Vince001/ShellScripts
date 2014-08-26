@@ -32,6 +32,8 @@ kill  $num
 #lcd_print.x "Getting SAM Can..."
 #sleep 1
 
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/disk1/lib
+export PATH=$PATH:/usr/local/sbin
 cd /mnt/disk0/afc/bin
 ./afc_app.x  > /tmp/txt.x &
 sleep 5
