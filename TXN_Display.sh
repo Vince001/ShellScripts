@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Vince 2014-10-16 Created.
+# 1, Only for Loyalty debit transaction analysis.
+# 2, The 256 bytes file header will not display.
+
 echo "===============================================================>>"
 
 txnfile=$1
@@ -10,9 +14,11 @@ if [ ! $txnfile ]; then
 fi
 
 num=$(cat $txnfile | wc -c)
-echo "File size: "$num
+let txn_cnt=($num-256)/64
+echo "File size: $num ====> Txn counter: $txn_cnt"
+echo ""
 
-n=0
+n=256
 txn_index=1
 
 #decalare -a sam_type_s
