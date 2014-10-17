@@ -124,8 +124,6 @@ do
         
         TripCounter_4=$(od -An -j $n -N 1 -s $txnfile) && ((n+=1))
 
-        # echo $a","$b
-        #echo "TxnType:"$a
         #printf "****************************************************************\n"
         printf "TXN Index: %02d |" $txn_index
         printf "TxnType: %02X |"$txn_type
@@ -149,5 +147,4 @@ do
         
         let txn_index=$txn_index+1
         # Lsam or Psam CAN
-        #echo "63 Bytes:"$b
 done
