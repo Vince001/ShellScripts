@@ -40,6 +40,10 @@ StationOFF[3]=0;
 TapInTime[6]=0;
 RFU[3]=0;
 
+printf "_________________________________________________________________________________"
+printf "___________________________________________________________________________"
+printf "_________________________________________________________________________________\n"
+
 printf "Index:|" $txn_index
 printf "Type:|"$txn_type
 printf "SAMCAN:                 |" ${SamCan[1]} ${SamCan[2]} ${SamCan[3]} ${SamCan[4]} ${SamCan[5]} ${SamCan[6]} ${SamCan[7]} ${SamCan[8]}
@@ -47,7 +51,7 @@ printf "CardCAN:                |"${CardCan[1]} ${CardCan[2]} ${CardCan[3]} ${Ca
 printf "SamCTC:  |"${SamCTC[1]} ${SamCTC[2]} ${SamCTC[3]}
 printf "UsrCTC:|"${UsrCTC[1]} ${UsrCTC[2]}
 printf "tTP:|"$tTP
-printf "TxnTime:             |"${TxnTime[1]} ${TxnTime[2]} ${TxnTime[3]} ${TxnTime[4]} ${TxnTime[5]} ${TxnTime[6]} ${TxnTime[7]}
+printf "TxnTime:            |"${TxnTime[1]} ${TxnTime[2]} ${TxnTime[3]} ${TxnTime[4]} ${TxnTime[5]} ${TxnTime[6]} ${TxnTime[7]}
 printf "BalanceBefore:|"${BalanceBefore[1]} ${BalanceBefore[2]} ${BalanceBefore[3]} ${BalanceBefore[4]}
 printf "Amount:     |"${Amount[1]} ${Amount[2]} ${Amount[3]} ${Amount[4]}
 printf "Tcert:      |"${Tcert[1]} ${Tcert[2]} ${Tcert[3]} ${Tcert[4]}
@@ -152,7 +156,7 @@ do
         printf "%02X %02X %02X |"${SamCTC[1]} ${SamCTC[2]} ${SamCTC[3]}
         printf "%02X %02X  |"${UsrCTC[1]} ${UsrCTC[2]}
         printf "%02X  |"$tTP
-        printf "%02X %02X %02X %02X %02X %02X %02X |"${TxnTime[1]} ${TxnTime[2]} ${TxnTime[3]} ${TxnTime[4]} ${TxnTime[5]} ${TxnTime[6]} ${TxnTime[7]}
+        printf "%02X%02X %02X-%02X %02X:%02X:%02X |"${TxnTime[1]} ${TxnTime[2]} ${TxnTime[3]} ${TxnTime[4]} ${TxnTime[5]} ${TxnTime[6]} ${TxnTime[7]}
         printf "%02X %02X %02X %02X   |"${BalanceBefore[1]} ${BalanceBefore[2]} ${BalanceBefore[3]} ${BalanceBefore[4]}
         printf "%02X %02X %02X %02X |"${Amount[1]} ${Amount[2]} ${Amount[3]} ${Amount[4]}
         printf "%02X %02X %02X %02X |"${Tcert[1]} ${Tcert[2]} ${Tcert[3]} ${Tcert[4]}
@@ -168,3 +172,8 @@ do
         let txn_index=$txn_index+1
         # Lsam or Psam CAN
 done
+
+printf "\--------------------------------------------------------------------------------"
+printf "\--------------------------------------------------------------------------"
+printf "\--------------------------------------------------------------------------------\n"
+
