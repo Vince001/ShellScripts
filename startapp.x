@@ -2,7 +2,7 @@
 
 loglevel=4
 
-if [ $1 -gt 0 ] && [ $1 -lt 5 ]
+if [ $1 -ge 0 ] && [ $1 -le 3 ]
     then
       loglevel=$1
 fi
