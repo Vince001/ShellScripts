@@ -2,9 +2,11 @@
 
 loglevel=4
 
-if [ $1 -ge 0 ] && [ $1 -le 3 ]
-    then
-      loglevel=$1
+if [[ -n $1 ]]; then
+  if [[ $1 -ge 0 ]] && [[ $1 -le 3 ]]
+      then
+        loglevel=$1
+  fi
 fi
 
 echo "loglevel is "$loglevel
