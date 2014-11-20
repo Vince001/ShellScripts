@@ -2,9 +2,10 @@
 
 # Please rename to startup.x in your root directory of ACR100.
 
-filename=$(date "+%Y-%m-%d-%H-%M-%S")
+#filename=$(date "+%Y-%m-%d-%H-%M-%S")
+filename="ACR300_IP.txt"
 
-echo $filename
+#echo $filename
 
 ifconfig >> $filename
 
