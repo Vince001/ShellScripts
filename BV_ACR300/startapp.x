@@ -9,12 +9,12 @@ if [[ -n $1 ]]; then
   fi
 fi
 
-echo "loglevel is "$loglevel
+# echo "loglevel is "$loglevel
 
-#cd /mnt/disk0/afc/bin/
+cd /mnt/disk0/afc/bin/
 
 echo "======== Turn to start APP ================>>>>>>>>"
 echo
 echo 
 
-#./afc_app.x-10-30-release -recordlog $loglevel
+./afc_app.x-10-30-release -recordlog $loglevel

@@ -18,7 +18,7 @@ let txn_cnt=($num-256)/64
 echo "File size: $num ====> Txn counter: $txn_cnt"
 echo ""
 
-n=256
+n=0
 txn_index=1
 
 #decalare -a sam_type_s
