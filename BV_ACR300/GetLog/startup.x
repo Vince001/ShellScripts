@@ -16,6 +16,7 @@ if [ -e /tmp/afc_log.txt ]; then
 else
     cd /mnt/disk0/afc/bin
     lcd_print.x "Restart APP ..."
+    sleep 1
     ./afc_app.x -recordlog 4 > /tmp/afc_log.txt &
     sync
 fi
