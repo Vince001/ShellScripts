@@ -104,12 +104,12 @@ do
     HeaderSoftwareVer[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderSoftwareVer[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
         
-    HeaderAppCode[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
-    HeaderAppCode[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
-    HeaderAppCode[3]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
-    HeaderAppCode[4]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
-    HeaderAppCode[5]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
-    HeaderAppCode[6]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
+    HeaderAppCode[1]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
+    HeaderAppCode[2]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
+    HeaderAppCode[3]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
+    HeaderAppCode[4]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
+    HeaderAppCode[5]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
+    HeaderAppCode[6]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))
         
     HeaderSamCan[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderSamCan[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
@@ -144,19 +144,19 @@ do
     HeaderDateTime[7]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     
     HeaderCollectFlag=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))     # 0x00 not collected 0x01 collected
-    HeaderMachineCode=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))    # char "M" for Machine
+    HeaderMachineCode=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))    # char "M" for Machine
         
     HeaderMachineNum[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderMachineNum[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderMachineNum[3]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     
-    HeaderBusCode=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  #  "B" BV
+    HeaderBusCode=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  #  "B" BV
     
     HeaderBusNum[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderBusNum[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderBusNum[3]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     
-    HeaderBusLineCode=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  # "L"  Bus Line, Bus APP
+    HeaderBusLineCode=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  # "L"  Bus Line, Bus APP
         
     HeaderBusLineNum[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
     HeaderBusLineNum[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
@@ -176,17 +176,17 @@ do
     
     let n=$n+1  # the doc miss a byte definition
     
-    HeaderFileType[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  # "R""E""C""."
-    HeaderFileType[2]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  # "R""E""C""."
-    HeaderFileType[3]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  # "R""E""C""."
-    HeaderFileType[4]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))  # "R""E""C""."
+    HeaderFileType[1]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  # "R""E""C""."
+    HeaderFileType[2]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  # "R""E""C""."
+    HeaderFileType[3]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  # "R""E""C""."
+    HeaderFileType[4]=$(od -An -j $n -N 1 -t c $txnfile) && ((n+=1))  # "R""E""C""."
     
     printf "MAC: %02X%02X%02X%02X \n" ${HeaderMAC[1]} ${HeaderMAC[2]} ${HeaderMAC[3]} ${HeaderMAC[4]}
     printf "SHA1: %02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X \n" \
                   ${HeaderSHA1[1]}${HeaderSHA1[2]} ${HeaderSHA1[3]} ${HeaderSHA1[4]} ${HeaderSHA1[5]} ${HeaderSHA1[6]} ${HeaderSHA1[7]} ${HeaderSHA1[8]} ${HeaderSHA1[9]} ${HeaderSHA1[10]} \
                   ${HeaderSHA1[11]} ${HeaderSHA1[12]} ${HeaderSHA1[13]} ${HeaderSHA1[14]} ${HeaderSHA1[15]} ${HeaderSHA1[16]} ${HeaderSHA1[17]} ${HeaderSHA1[18]} ${HeaderSHA1[19]} ${HeaderSHA1[20]}
     printf "SoftwareVer: %02X %02X \n" ${HeaderSoftwareVer[1]} ${HeaderSoftwareVer[2]}
-    printf "AppCode: %02X%02X%02X%02X%02X%02X \n" ${HeaderAppCode[1]} ${HeaderAppCode[2]} ${HeaderAppCode[3]} ${HeaderAppCode[4]} ${HeaderAppCode[5]} ${HeaderAppCode[6]}
+    printf "AppCode: %c%c%c%c%c%c \n" ${HeaderAppCode[1]} ${HeaderAppCode[2]} ${HeaderAppCode[3]} ${HeaderAppCode[4]} ${HeaderAppCode[5]} ${HeaderAppCode[6]}
     printf "SamCan: %02X%02X%02X%02X%02X%02X%02X%02X \n" \
                     ${HeaderSamCan[1]} ${HeaderSamCan[2]} ${HeaderSamCan[3]} ${HeaderSamCan[4]} ${HeaderSamCan[5]} ${HeaderSamCan[6]} ${HeaderSamCan[7]} ${HeaderSamCan[8]}
     printf "BlacklistVer: %02X %02X %02X %02X \n" ${HeaderBlacklistVer[1]} ${HeaderBlacklistVer[2]} ${HeaderBlacklistVer[3]} ${HeaderBlacklistVer[4]}
@@ -198,16 +198,16 @@ do
     printf "DateTime: %02X%02X-%02X-%02X %02X:%02X:%02X \n" \
                       ${HeaderDateTime[1]} ${HeaderDateTime[2]} ${HeaderDateTime[3]} ${HeaderDateTime[4]} ${HeaderDateTime[5]} ${HeaderDateTime[6]} ${HeaderDateTime[7]}
     printf "CollectFlag: %02X \n" $HeaderCollectFlag   # 0x00 not collected 0x01 collected
-    printf "MachineCode: M" ${HeaderMachineCode}   # char "M" for Machine
+    printf "MachineCode: %c" ${HeaderMachineCode}   # char "M" for Machine
     printf "%02X%02X%02X " ${HeaderMachineNum[1]} ${HeaderMachineNum[2]} ${HeaderMachineNum[3]}
-    printf "BusCode: B" $HeaderBusCode #  "B" BV
+    printf "BusCode: %c" $HeaderBusCode #  "B" BV
     printf "%02X%02X%02X " ${HeaderBusNum[1]} ${HeaderBusNum[2]} ${HeaderBusNum[3]}
-    printf "BusLineCode: L" $HeaderBusLineCode # "L"  Bus Line, Bus APP
+    printf "BusLineCode: %c" $HeaderBusLineCode # "L"  Bus Line, Bus APP
     printf "%02X%02X%02X \n" ${HeaderBusLineNum[1]} ${HeaderBusLineNum[2]} ${HeaderBusLineNum[3]}
     printf "DriverCode: %02X %02X %02X %02X " ${HeaderDriverCode[1]} ${HeaderDriverCode[2]} ${HeaderDriverCode[3]} ${HeaderDriverCode[4]}
     printf "RunCode: %02X %02X %02X %02X " ${HeaderRunCode[1]} ${HeaderRunCode[2]} ${HeaderRunCode[3]} ${HeaderRunCode[4]}
     # printf "RFU44[44]=0;"
-    printf "FileType: %02X%02X%02X%02X \n" ${HeaderFileType[1]} ${HeaderFileType[2]} ${HeaderFileType[3]} ${HeaderFileType[4]} # "R""E""C""."
+    printf "FileType: %c%c%c%c \n" ${HeaderFileType[1]} ${HeaderFileType[2]} ${HeaderFileType[3]} ${HeaderFileType[4]} # "R""E""C""."
     
 done
 
