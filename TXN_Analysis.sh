@@ -5,7 +5,6 @@
 # 2, The 256 bytes file header will not display.
 # 3, Add the header analysis.
 
-# todo printf char as "M" "B" "L"
 # todo recognise the LSAM PSAM Card Type
 
 # Note: If you run the script on a new Ubuntu, please run: sudo dpkg-reconfigure dash
@@ -19,8 +18,9 @@ if [ ! -f $txnfile ]; then
     exit 0
 fi
 
-num=$(cat $txnfile | wc -c)
-let txn_cnt=($num-256)/64
+# num=$(cat $txnfile | wc -c)
+num=$(stat -c %s $txnfile)
+let txn_cnt=$num/64-4
 echo "File size: $num ====> Txn counter: $txn_cnt"
 echo ""
 
@@ -28,48 +28,47 @@ n=0
 txn_index=1
 
 #decalare -a sam_type_s
-sam_type_s[2]="LSamCan"
-sam_type_s[1]="PSamCan"
-sam_type_s[2]="LSamCan"
+# sam_type_s[1]="PSamCan"
+# sam_type_s[2]="LSamCan"
 
-SamCan[8]=0;
-CardCan[8]=0;
-SamCTC[3]=0;
-UsrCTC[2]=0;
-TxnTime[7]=0;
-BalanceBefore[4]=0;
-Amount[4]=0;
-Tcert[4]=0;
-Dcert[4]=0;
-StationON[3]=0;
-StationOFF[3]=0;
-TapInTime[6]=0;
-RFU[3]=0;
+# SamCan[8]=0;
+# CardCan[8]=0;
+# SamCTC[3]=0;
+# UsrCTC[2]=0;
+# TxnTime[7]=0;
+# BalanceBefore[4]=0;
+# Amount[4]=0;
+# Tcert[4]=0;
+# Dcert[4]=0;
+# StationON[3]=0;
+# StationOFF[3]=0;
+# TapInTime[6]=0;
+# RFU[3]=0;
 
 # -- Head contents
-HeaderMAC[4]=0;
-HeaderSHA1[20]=0;
-HeaderSoftwareVer[2]=0;
-HeaderAppCode[6]=0;
-HeaderSamCan[8]=0;
-HeaderBlacklistVer[4]=0;
-HeaderRFU1=0;
-HeaderAppType=0;
-HeaderFileStatus=0;  # 0xAA effective 0xBB invalid
-HeaderSequenceNO[2]=0;
-HeaderTxnCnt[2]=0;
-HeaderDateTime[7]=0;
-HeaderCollectFlag=0;     # 0x00 not collected 0x01 collected
-HeaderMachineCode=0;    # char "M" for Machine
-HeaderMachineNum[3]=0;
-HeaderBusCode=0;  #  "B" BV
-HeaderBusNum[3]=0;
-HeaderBusLineCode=0;  # "L"  Bus Line, Bus APP
-HeaderBusLineNum[3]=0;
-HeaderDriverCode[4]=0;
-HeaderRunCode[4]=0;
-HeaderRFU44[44]=0;
-HeaderFileType[4]=0;  # "R""E""C""."
+# HeaderMAC[4]=0;
+# HeaderSHA1[20]=0;
+# HeaderSoftwareVer[2]=0;
+# HeaderAppCode[6]=0;
+# HeaderSamCan[8]=0;
+# HeaderBlacklistVer[4]=0;
+# HeaderRFU1=0;
+# HeaderAppType=0;
+# HeaderFileStatus=0;  # 0xAA effective 0xBB invalid
+# HeaderSequenceNO[2]=0;
+# HeaderTxnCnt[2]=0;
+# HeaderDateTime[7]=0;
+# HeaderCollectFlag=0;     # 0x00 not collected 0x01 collected
+# HeaderMachineCode=0;    # char "M" for Machine
+# HeaderMachineNum[3]=0;
+# HeaderBusCode=0;  #  "B" BV
+# HeaderBusNum[3]=0;
+# HeaderBusLineCode=0;  # "L"  Bus Line, Bus APP
+# HeaderBusLineNum[3]=0;
+# HeaderDriverCode[4]=0;
+# HeaderRunCode[4]=0;
+# HeaderRFU44[44]=0;
+# HeaderFileType[4]=0;  # "R""E""C""."
 
 # Analysis the transaction file header.
 while [[ $n -lt 255 ]]   # 0-255
