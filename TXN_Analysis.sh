@@ -20,6 +20,12 @@ fi
 
 # num=$(cat $txnfile | wc -c)
 num=$(stat -c %s $txnfile)
+
+if [ $num -lt 256 ]; then
+    echo "File length($num) error !"
+    exit 1
+fi
+
 let txn_cnt=$num/64-4
 echo "File size: $num ====> Txn counter: $txn_cnt"
 echo ""
@@ -71,7 +77,7 @@ txn_index=1
 # HeaderFileType[4]=0;  # "R""E""C""."
 
 # Analysis the transaction file header.
-while [[ $n -lt 255 ]]   # 0-255
+while [[ $n -lt 254 ]]   # 0-255
 do    
     printf "***************************************************************************\n"
     HeaderMAC[1]=$(od -An -j $n -N 1 -t d $txnfile) && ((n+=1))
@@ -323,7 +329,7 @@ do
         TripCounter_4=$(od -An -j $n -N 1 -s $txnfile) && ((n+=1))
 
         #printf "****************************************************************\n"
-        printf "%02d    |" $txn_index
+        printf "%04d    |" $txn_index
         printf "%02X   |"$txn_type
         printf "%02X %02X %02X %02X %02X %02X %02X %02X |" ${SamCan[1]} ${SamCan[2]} ${SamCan[3]} ${SamCan[4]} ${SamCan[5]} ${SamCan[6]} ${SamCan[7]} ${SamCan[8]}
         printf "%02X %02X %02X %02X %02X %02X %02X %02X |"${CardCan[1]} ${CardCan[2]} ${CardCan[3]} ${CardCan[4]} ${CardCan[5]} ${CardCan[6]} ${CardCan[7]} ${CardCan[8]}

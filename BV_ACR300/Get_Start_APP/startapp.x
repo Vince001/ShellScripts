@@ -1,5 +1,7 @@
 #! /bin/sh
 
+cdate=$(date "+%m-%d")
+
 loglevel=4
 
 if [[ -n $1 ]]; then
@@ -17,4 +19,4 @@ echo "======== Turn to start APP ================>>>>>>>>"
 echo
 echo 
 
-./afc_app.x-12-04-release -recordlog $loglevel
+./afc_app.x-$cdate-release -recordlog $loglevel
