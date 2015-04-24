@@ -329,7 +329,7 @@ do
         TripCounter_4=$(od -An -j $n -N 1 -s $txnfile) && ((n+=1))
 
         #printf "****************************************************************\n"
-        printf "%04d    |" $txn_index
+        printf "%04d  |" $txn_index
         printf "%02X   |"$txn_type
         printf "%02X %02X %02X %02X %02X %02X %02X %02X |" ${SamCan[1]} ${SamCan[2]} ${SamCan[3]} ${SamCan[4]} ${SamCan[5]} ${SamCan[6]} ${SamCan[7]} ${SamCan[8]}
         printf "%02X %02X %02X %02X %02X %02X %02X %02X |"${CardCan[1]} ${CardCan[2]} ${CardCan[3]} ${CardCan[4]} ${CardCan[5]} ${CardCan[6]} ${CardCan[7]} ${CardCan[8]}
